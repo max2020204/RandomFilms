@@ -1,0 +1,82 @@
+﻿@model FilmModelView
+@{
+    ViewData["Title"] = Model.Film.Name;
+}
+<div class="bg-fon set-bg" data-setbg="@Model.Film.BackGroundImage">
+    <div class="blackoutall-80">
+        <div class="container">
+            <div class="d-flex min-vh-100 justify-content-center align-items-center">
+                <div class="card bg-transparent my-2  border-0">
+                    @if (Model.State == 1)
+                    {
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>D'oh!</strong> We can’t find anything here from your preferences, so we suggest for you random film
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+                    <div class="matt rounded-3 shadow">
+                        <div class="card-header">
+                            <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"><i class="fas fa-film mr-2"></i>Film</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="trailer-tab" data-bs-toggle="tab" href="#trailer" role="tab" aria-controls="trailer" aria-selected="false"><i class="fab fa-youtube mr-2"></i>Trailer</a>
+                                </li>
+                                @if (Model.State != 10)
+                                {
+                                    <li class="nav-item" role="presentation">
+                                        <a asp-action="Index" asp-controller="Film" asp-route-id="" class="nav-link"><i class="fas fa-dice mr-2 "></i>Random</a>
+                                    </li>
+                                }
+
+                            </ul>
+                        </div>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="row g-0">
+                                    <div class="col-md-4">
+                                        <img src="@Model.Film.Image" class="img-fluid rounded-3 p-lg-0" alt="@Model.Film.Name">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h1 class="text-center text-lg-start"><strong>@Model.Film.Name</strong></h1>
+                                            <p class="card-text"><strong>Country: </strong>@String.Join(", ", Model.Film.Countries.Select(x => x.Country)) </p>
+                                            <p class="card-text"><strong>Category: </strong>@String.Join(", ", Model.Film.Genre.Select(o => o.Gener))</p>
+                                            <p class="card-text"><strong>Release date: </strong>@Model.Film.ReleaseDate</p>
+                                            <p class="card-text"><strong>Age: </strong>@Model.Film.Age+</p>
+                                            <p class="card-text"><strong>Time: </strong>@Model.Film.Time min</p>
+                                            <p class="card-text"><strong>IMDB rating: </strong>@Model.Film.IMDB</p>
+                                            <p class="card-text"><strong>Description: </strong>@Model.Film.Description</p>
+
+                                        </div>
+                                        <div class="mb-3 mt-1">
+                                            <div class="row row-cols-6">
+                                                <div class="col-12 col-md-6">
+                                                    <strong class="mx-3">Share:</strong>
+                                                    <a class="mx-1" href="https://telegram.me/share/url?url=@Context.Request.GetDisplayUrl()&text=I%20know%20what%20we%20are%20gonna%20watch%20tonight:@Model.Film.Name"><i class="fab fa-telegram-plane"></i></a>
+                                                    <a class="mx-1" href="https://www.facebook.com/sharer/sharer.php?u=@Context.Request.GetDisplayUrl()"><i class="fab fa-facebook-f"></i></a>
+                                                    <a class="mx-1" href="https://twitter.com/intent/tweet?url=@Context.Request.GetDisplayUrl()&text=I%20know%20what%20we%20are%20gonna%20watch%20tonight:@Model.Film.Name"><i class="fab fa-twitter"></i></a>
+                                                    <a class="mx-1" href="http://vkontakte.ru/share.php?url=@Context.Request.GetDisplayUrl()"><i class="fab fa-vk"></i></a>
+                                                    <a class="mx-1" href="https://pinterest.com/pin/create/button/?url=@Context.Request.GetDisplayUrl()&media=&description=I%20know%20what%20we%20are%20gonna%20watch%20tonight:@Model.Film.Name"><i class="fab fa-pinterest"></i></a>
+                                                </div>
+                                                <div class="col-12 col-md-6 d-flex justify-content-lg-center align-content-lg-center ">
+                                                    <strong class="mx-3">Contact Information:</strong>
+                                                    <a class="mx-1" href="mailto:randomfilms2021@gmail.com"><i class="fas fa-envelope"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--footer-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="trailer" role="tabpanel" aria-labelledby="profile-tab">
+                                <iframe class="size_adaptive" src="@Model.Film.TrailerURL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

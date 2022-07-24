@@ -1,0 +1,33 @@
+﻿@model ChangeRoleModel
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewData["Title"] = "Edit Role";
+}
+@if (Model.State == 1)
+{
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Wow!</strong>  You got new level
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+}
+<div class="card">
+    <div class="card-header">
+        Change Role
+    </div>
+    <div class="card-body">
+        <form asp-action="Edit" method="post">
+            <input type="hidden" name="userId" value="@Model.UserId" />
+            <div class="form-group mb-3">
+                @foreach (IdentityRole role in Model.AllRoles)
+                {
+                    <input type="checkbox" name="roles" value="@role.Name" @(Model.UserRoles.Contains(role.Name) ? "checked=\"checked\"" : "") />
+                    <label class="form-check-label" for="flexCheckDefault">
+                        @role.Name
+                    </label>
+                    <br />
+                }
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+﻿@model LoginModel
+@{
+    ViewData["Title"] = "Login";
+}
+<div class="bg-fon set-bg" data-setbg="/img/144-1448846_snoopy-christmas-peanuts-movie.jpg">
+    <div class="blackoutall-80">
+        <div class="container">
+            <div class="d-flex min-vh-100 justify-content-center align-items-center">
+                <div class="card bg-transparent my-2  border-0">
+                    <div class="rounded-3">
+                        <div class="card-body">
+                            <form asp-controller="Account" method="post" asp-action="Login" asp-route-returnurl="@Model.ReturnUrl" class="text-center justify-content-center">
+                                <label class="h2 text-white">Snoopy greets you,<br> you have an account?</label>
+                                <div class="mb-3 ">
+                                    <label for="exampleInputEmail1" class="form-label text-white">Login</label>
+                                    <input class="form-control rounded-pill text-center" asp-for="Login">
+                                </div>
+                                <div class="mb-3 ">
+                                    <label for="exampleInputPassword1" class="form-label text-white">Password</label>
+                                    <input type="password" class="form-control rounded-pill text-center" asp-for="Password">
+                                </div>
+                                <div class="mb-3 form-check align-items-center">
+                                    <label class="form-check-label text-white" for="exampleCheck1">Remember me</label>
+                                    <input type="checkbox" class="form-check-input " asp-for="RememberMe">
+                                </div>
+                                <div class="text-white" asp-validation-summary="ModelOnly"></div>
+                                <button type="submit" class="btn btn-primary">Login in</button>
+                            </form>
+                        </div>
+                        <!--footer-->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

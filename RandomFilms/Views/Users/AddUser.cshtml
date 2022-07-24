@@ -1,0 +1,50 @@
+﻿@model RegisterModel
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewData["Title"] = "Add user";
+}
+@if (Model?.State == 1)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>I got you</strong>, this user will be added
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+else if (Model?.State == 2)
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>D'oh</strong> You should check in on some of those fields below
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+<div class="card">
+    <div class="card-header">
+        Add User
+    </div>
+    <div class="card-body">
+        <form asp-action="AddUser" asp-controller="Users" method="post">
+            <div class="mb-3">
+                <label class="form-label">FirstName</label>
+                <input type="text" asp-for="FirstName" class="form-control" placeholder="FirstName">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">LastName</label>
+                <input type="text" asp-for="LastName" class="form-control" placeholder="LastName">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">UserName</label>
+                <input type="text" asp-for="Login" class="form-control" placeholder="UserName">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" asp-for="Email" class="form-control" placeholder="Email">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" asp-for="Password" class="form-control">
+            </div>
+            <div asp-validation-summary="ModelOnly"></div>
+            <button type="submit" class="btn btn-primary">Add User</button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<FilmModel>
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewData["Title"] = "Films";
+}
+<div class="card">
+    <div class="card-header">
+        All Films
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="example" class="table  table-borderless">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Country</th>
+                        <th>Date</th>
+                        <th>Age</th>
+                        <th>Time</th>
+                        <th>IMDB</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td><a asp-action="Index" asp-controller="Film" asp-route-id="@item.Id">@item.Name</a> </td>
+                            <td>@string.Join(", ", item.Countries.Select(x=>x.Country))</td>
+                            <td>@item.ReleaseDate</td>
+                            <td>@item.Age</td>
+                            <td>@item.Time</td>
+                            <td>@item.IMDB</td>
+                            <td class="d-flex" align="center">
+                                <a class="btn btn-link mx-2" asp-action="Edit" asp-route-id="@item.Id"> <i class="fas fa-pencil-alt"></i></a>
+                                <form asp-action="Delete" asp-route-id="@item.Id" class="d-flex align-content-center" method="post">
+                                    <button type="submit" class="btn btn-link mx-2"> <i class="fas fa-trash"></i></button>
+                                </form>
+
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Country</th>
+                        <th>Date</th>
+                        <th>Age</th>
+                        <th>Time</th>
+                        <th>IMDB</th>
+                        <th>Action</th>
+                    </tr>
+                </tfoot>
+
+            </table>
+        </div>
+    </div>
+</div>

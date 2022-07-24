@@ -1,0 +1,175 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - Admin Panel</title>
+    <link rel="stylesheet" type="text/css" href="~/css/AdminStyle.css" asp-append-version="true">
+    <link rel="stylesheet" type="text/css" href="~/lib/CssProLayout/cssprolayout.min.css" asp-append-version="true">
+    <link rel="stylesheet" type="text/css" href="~/lib/ParticalFontAwsome/css/all.min.css" asp-append-version="true" />
+    <link rel="stylesheet" type="text/css" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
+    <link rel="stylesheet" type="text/css" href="~/lib/DataTable/datatables.min.css" asp-append-version="true" />
+    <link rel="stylesheet" type="text/css" href="~/lib/bootstrap-select-1.14.0-beta2/css/bootstrap-select.min.css" asp-append-version="true" />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7JQ44WT4TQ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-7JQ44WT4TQ');
+    </script>
+</head>
+<body>
+    <div class="layout has-sidebar fixed-sidebar fixed-header">
+        <aside id="sidebar" class="sidebar break-point-lg has-bg-image">
+            <div class="image-wrapper">
+                <img src="~/img/SideBar.jpg" alt="sidebar background" />
+            </div>
+            <div class="sidebar-layout">
+                <div class="sidebar-header ">
+                    <span style="
+                      text-transform: uppercase;
+                      font-size: 15px;
+                      letter-spacing: 3px;
+                      font-weight: bold;
+                    ">Pro Admin</span>
+                </div>
+                <div class="sidebar-content">
+                    <nav class="menu open-current-submenu">
+                        <ul>
+                            <li class="menu-item">
+                                <a asp-controller="Admin" asp-action="Index">
+                                    <span class="menu-icon">
+                                        <i class="fas fa-book"></i>
+                                    </span>
+                                    <span class="menu-title">Dashbord</span>
+                                </a>
+                            </li>
+                            <li class="menu-item sub-menu">
+                                <a href="#">
+                                    <span class="menu-icon">
+                                        <i class="fas fa-film"></i>
+                                    </span>
+                                    <span class="menu-title">Films</span>
+                                </a>
+                                <div class="sub-menu-list">
+                                    <ul>
+                                        <li class="menu-item">
+                                            <a asp-controller="Movie" asp-action="AddFilm">
+                                                <span class="menu-title">Add Film</span>
+                                            </a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a asp-controller="Movie" asp-action="AllFilms">
+                                                <span class="menu-title">All Films</span>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="menu-item sub-menu">
+                                <a href="#">
+                                    <span class="menu-icon">
+                                        <i class="fas fa-ticket-alt"></i>
+                                    </span>
+                                    <span class="menu-title">Genre</span>
+                                </a>
+                                <div class="sub-menu-list">
+                                    <ul>
+                                        <li class="menu-item">
+                                            <a asp-controller="Genre" asp-action="AddGenre">
+                                                <span class="menu-title">Add Genre</span>
+                                            </a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a asp-controller="Genre" asp-action="AllGenres">
+                                                <span class="menu-title">All Genres</span>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="menu-item sub-menu">
+                                <a href="#">
+                                    <span class="menu-icon">
+                                        <i class="fas fa-user-tag"></i>
+                                    </span>
+                                    <span class="menu-title">Roles & Users</span>
+                                </a>
+                                <div class="sub-menu-list">
+                                    <ul>
+                                        <li class="menu-item">
+                                            <a asp-controller="Users" asp-action="AddUser">
+                                                <span class="menu-title">Add User</span>
+                                            </a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a asp-action="AllUsers" asp-controller="Users">
+                                                <span class="menu-title">All Users</span>
+                                            </a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a asp-action="Index" asp-controller="Roles">
+                                                <span class="menu-title">All Roles</span>
+                                            </a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a asp-action="Create" asp-controller="Roles">
+                                                <span class="menu-title">Add Role</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="menu-item">
+                                <div class="sidebar-footer "></div>
+                                <form id="myform" asp-action="Logout" asp-controller="Account" method="post">
+                                    <a href="javascript:;" onclick="document.getElementById('myform').submit()">
+                                        <span class="menu-icon">
+                                            <i class="fas fa-sign-out-alt"></i>
+                                        </span>
+                                        <span class="menu-title">Logout</span>
+                                    </a>
+                                </form>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+            </div>
+        </aside>
+        <div id="overlay" class="overlay"></div>
+        <div class="layout">
+            <header class="header">
+                <a id="btn-collapse" href="#">
+                    <i class="fas fa-bars fa-lg"></i>
+                </a>
+                <a id="btn-toggle" href="#" class="sidebar-toggler break-point-lg">
+                    <i class="fas fa-bars fa-lg"></i>
+                </a>
+            </header>
+            <main class="content">
+                @RenderBody()
+
+
+                <footer class="footer">
+                    <span>© 2022 Made by - BlackDream</span>
+                </footer>
+            </main>
+            <div class="overlay"></div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/@@popperjs/core@2"></script>
+
+    <script type="text/javascript" src="~/js/AdminSidebar.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/lib/DataTable/jQuery-3.6.0/jquery-3.6.0.min.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/lib/DataTable/datatables.min.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/js/admin.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/lib/bootstrap-select-1.14.0-beta2/js/bootstrap-select.min.js" asp-append-version="true"></script>
+</body>
+</html>

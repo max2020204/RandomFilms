@@ -1,0 +1,46 @@
+﻿@model IndexViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+<section class="bg-fon set-bg" data-setbg="img/background/cinema-cartoon.jpg">
+    <div class="blackoutall-50">
+        <div class="d-flex min-vh-100 align-items-center justify-content-center">
+            <div class="container">
+                <div class="row mb-3 mb-lg-1">
+                    <div class="col d-flex justify-content-center align-items-center">
+                        <h1 class="heading-section text-center text-white ">Choose genres that you like</h1>
+                    </div>
+                </div>
+                <form method="post" asp-controller="Film" class="d-flex align-items-center justify-content-center">
+                    <div class="row g-lg-0">
+                        <div role="listbox" class="col-12 col-lg-auto my-3 d-grid justify-content-center align-items-center">
+                            <label class="d-block text-white-50 mb-1 ">Include</label>
+                            <select id="GenreIn" onchange="f1();" asp-for="@Model.Selected" name="GenreIn" data-dropup-auto="false" data-size="5" class="selectpicker " data-style="rounded-left bg-white p-2 p-lg-2" data-live-search="true" multiple data-selected-text-format="count > 2" data-max-options="5">
+                                @foreach (var item in Model.Geners)
+                                {
+                                    <option value="@item.Id">@item.Genre</option>
+                                }
+                            </select>
+                        </div>
+                        <div role="listbox" class="col-12 col-lg-auto my-3 d-grid justify-content-center align-items-center">
+                            <label class="d-block text-white-50 mb-1">Exclude</label>
+                            <select id="GenreOut" onchange="f2();" asp-for="@Model.Selected" name="GenreOut" data-dropup-auto="false" data-size="5" class="selectpicker" data-style="round bg-white p-2 p-lg-2" data-live-search="true" multiple data-selected-text-format="count > 2" data-max-options="5">
+                                @foreach (var item in Model.Geners)
+                                {
+                                    <option value="@item.Id">@item.Genre</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div role="button" class="col-12 col-lg-auto my-3 d-grid justify-content-center align-items-end">
+                            <input type="submit" value="Find" class="btn btn-primary rounded-right py-2 py-lg-2 px-5" />
+                        </div>
+                    </div>
+                </form>
+                <div class="text-white text-center">
+                    © RandomFilms @DateTime.Now.Year
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

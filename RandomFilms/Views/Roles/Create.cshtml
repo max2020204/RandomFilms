@@ -1,0 +1,41 @@
+﻿@model CreateRoleModel
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewData["Title"] = "Create Role";
+}
+@if (Model.Id == 1)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Woow!</strong> Look at this amazing role
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+else if (Model.Id == 2)
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Holy moly!</strong> This role must be added, try again
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+else if (Model.Id == 3)
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Oh no!</strong> This role has been already added
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+<div class="card">
+    <div class="card-header">
+        Add Role
+    </div>
+    <div class="card-body">
+        <form method="post" asp-action="Create" asp-controller="Roles">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">New Role</label>
+                <input type="text" name="name" class="form-control">
+            </div>
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+    </div>
+</div>

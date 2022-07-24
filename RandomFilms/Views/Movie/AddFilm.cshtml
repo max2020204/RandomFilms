@@ -1,0 +1,96 @@
+﻿@model AddFilmsModel
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewData["Title"] = "Add Film";
+}
+
+@if (Model?.Added == 1)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Well done!</strong> Aww yeah, you successfully added film.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+else if (Model?.Added == 2)
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+else if (Model?.Added == 3)
+{
+    <div class="alert alert-danger d-flex align-items-center" role="alert">
+        <i class="fas fa-exclamation-triangle mx-2"></i>
+        <div>
+            This film has been already added
+        </div>
+    </div>
+}
+
+<div class="card">
+    <div class="card-header">
+        Add Film
+    </div>
+    <div class="card-body">
+        <form method="post" asp-action="AddFilm" asp-controller="Movie" id="FormEyeDee">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Name</label>
+                <input type="text" asp-for="Films.Name" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Country</label><br>
+                <select asp-for="@Model.CountriesSelected" name="CountriesSelected" data-width="auto" data-dropup-auto="false" data-size="5" class="selectpicker " data-style="rounded-3 bg-white" data-live-search="true" multiple data-max-options="10" required>
+                    @foreach (var item in Model.Countries)
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Categories</label><br>
+                <select asp-for="@Model.GenresSelected" name="GenresSelected" data-width="auto" data-dropup-auto="false" data-size="5" class="selectpicker " data-style="rounded-3 bg-white" data-live-search="true" multiple data-max-options="10" required>
+                    @foreach (var item in Model.Geners)
+                    {
+                        <option value="@item.Id">@item.Genre</option>
+                    }
+                </select>
+            </div>
+            <div class="mb-3 w-100">
+                <label for="exampleInputPassword1" class="form-label">Release date</label>
+                <input type="date" asp-for="Films.ReleaseDate" min="1900-01-01" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Age</label>
+                <input type="number" max="21" asp-for="Films.Age" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Time</label>
+                <input type="number" asp-for="Films.Time" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">IMDB</label>
+                <input type="number" step="0.01" max="10" min="0" asp-for="Films.IMDB" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Description</label><br>
+                <textarea class="form-control" asp-for="Films.Description" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Image</label>
+                <input type="text" asp-for="Films.Image" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Background Image</label>
+                <input type="text" asp-for="Films.BackGroundImage" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Trailer</label>
+                <input type="text" asp-for="Films.TrailerURL" class="form-control" required>
+            </div>
+            <div asp-validation-summary="ModelOnly"></div>
+            <input type="submit" class="btn btn-primary" value="Add Film">
+            <input type="submit" class="btn btn-primary" asp-action="Preview" value="Preview">
+        </form>
+    </div>
+</div>

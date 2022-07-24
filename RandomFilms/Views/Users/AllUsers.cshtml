@@ -1,0 +1,60 @@
+﻿@model IQueryable<User>
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewData["Title"] = "All users";
+}
+<div class="card">
+    <div class="card-header">
+        All Users
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="example" class="table  table-borderless">
+                <thead>
+                    <tr>
+                        <th>FirstName</th>
+                        <th>LastName</th>
+                        <th>UserNmae</th>
+                        <th>Email</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.FirstName</td>
+                            <td>@item.LastName</td>
+                            <td>@item.UserName</td>
+                            <td>@item.Email</td>
+                            <th class="d-flex align-content-center">
+                                @if (item.UserName != "Admin")
+                                {
+                                    <form asp-action="Delete" asp-route-id="@item.Id" method="post">
+                                        <a class="btn btn-link" asp-action="ChangePassword" asp-route-id="@item.Id"><i class="fas fa-key"></i></a>
+                                        <button type="submit" class="btn btn-link">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                    <a class="btn btn-link" asp-controller="Roles" asp-action="Edit" asp-route-userid="@item.Id"><i class="fas fa-user-tag"></i></a>
+                                }
+
+                            </th>
+                        </tr>
+                    }
+
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>FirstName</th>
+                        <th>LastName</th>
+                        <th>UserNmae</th>
+                        <th>Email</th>
+                        <th>Action</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
